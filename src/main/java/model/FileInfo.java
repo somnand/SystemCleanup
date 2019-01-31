@@ -32,6 +32,12 @@ public class FileInfo
 	{
 		this.fileSize = fileSize;
 	}
+	
+	@Override
+	public int hashCode()
+	{
+		return 0;//returning this to focus on the equals() only.
+	}
 		
 	@Override
 	public boolean equals(Object anotherFile)
@@ -51,4 +57,9 @@ public class FileInfo
 		}
 		return isEqual;
 	}
+	@Override
+	public String toString()
+	{
+		return filename+" : "+sha1sumValue+" : "+fileSize;
+	}		
 }

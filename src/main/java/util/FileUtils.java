@@ -26,8 +26,8 @@ public class FileUtils
 			throw new IOException("Can't determine file size");
 	}
 	/**
-	 * Overloaded version for the above method
-	 * 
+	 * Overloaded version for the above method. Method to calculate the size of File/Directories
+	 *  
 	 * @param file
 	 * @return
 	 */
