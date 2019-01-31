@@ -18,7 +18,8 @@ import util.FileUtils;
  */
 public class SearchEngine 
 {
-	static HashSet<FileInfo> fileList=new HashSet<FileInfo>();
+	private static HashSet<FileInfo> fileList=new HashSet<FileInfo>();
+	private static HashSet<String> duplicateFileList = new HashSet<String>();
 	
 	/**
 	 * Method to iterate over the current folder and add the <code>FileInfo</code> into the HashSet.
@@ -28,7 +29,8 @@ public class SearchEngine
 	{
 		FileInfo currentFileInfo=null;
 		File[] filesInFolder = folder.listFiles();
-		
+		if(folder.getName().startsWith("."))
+			return;
 		if(folder.isHidden())
 			return;
 		if(filesInFolder==null)
@@ -46,7 +48,7 @@ public class SearchEngine
 						
 				boolean isAdded = fileList.add(currentFileInfo);
 				if(!isAdded)
-					System.out.println(currentFileInfo.getFilename());
+					duplicateFileList.add("rm -rf "+currentFileInfo.getFilename());					
 			}
 			if(file.isDirectory())
 				searchFolder(file);
@@ -56,12 +58,22 @@ public class SearchEngine
 	
 	public static void main(String[] args)throws IOException,NoSuchAlgorithmException
 	{
+		if(args.length==0)
+		{
+			System.out.println("Usage :  java -jar target/SystemCleanup-0.0.1-SNAPSHOT.jar \"Path to the root\"");
+		}
 		String rootPath = args[0];
-		rootPath="C:\\Users\\1021623\\git\\SystemCleanup\\testcases";//To be commented for use
 		File rootFolder = new File(rootPath);
-		System.out.println("Printing all the duplicated files");
+		System.out.println("Analysing "+rootPath+" for duplicates ...");		
 		searchFolder(rootFolder);
+		System.out.println("Files scanned "+(fileList.size()+duplicateFileList.size()));
+		System.out.println("Duplicates : "+duplicateFileList.size());
+		System.out.println("Removal commands : (Unix)");
+		for(String command : duplicateFileList)
+			System.out.println(command);
 		System.out.println("Comparision completed!!");
+		
+		
 		
 		//TODO Move this below test into a complete Test Case. 
 		/* Unit test case for SearchEngine */

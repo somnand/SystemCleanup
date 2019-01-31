@@ -4,16 +4,17 @@
 
 	<groupId>SystemCleanup</groupId>
 	<artifactId>SystemCleanup</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-STABLE</version>
 	<packaging>jar</packaging>
 
-	<name>SystemCleanup</name>	
+	<name>SystemCleanup</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.main.class>core.SearchEngine</java.main.class>
 	</properties>
 
-	<dependencies>		
+	<dependencies>
 		<!-- Testing dependency -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -22,4 +23,33 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<build>
+		<plugins>
+			<!-- Maven Assembly plugin -->
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>				
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+				<finalName>${artifactId}</finalName>
+				<appendAssemblyId>false</appendAssemblyId>
+					<archive>
+						<manifest>
+							<mainClass>${java.main.class}</mainClass>
+						</manifest>
+					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>						
+					</descriptorRefs>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
