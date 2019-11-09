@@ -1,9 +1,18 @@
 # System Cleanup
 
-This program automatically identifies the duplicated files and eventually removes them
+This program automatically identifies the duplicated files and eventually removes them.
 
-## Getting Started
+The program will iterate through all folders recursively limited to the root directory mentioned.
+It will obtain all the files and store them into a [data-structure]currently HashSet.
+Objects of <code>model.FileInfo</code> are created which are later on stored into the HashSet mentioned.
+Any collision will show same files. 
 
+## Using the Software
+From the releases section download the binary and run it using the following command.
+
+java -jar SystemCleanup.jar "Path to Root" 
+
+## Getting Started(Development)
 Clone the project. 
 
 *git clone https://github.com/somnand/SystemCleanup.git*
@@ -32,7 +41,4 @@ Tests will cover the overall functionality of the project.
 
 ## Authors
 
-* **Somsurya Nanda** - *Initial work* 
-
-
-
+* **Somsurya Nanda** - *Initial work*
