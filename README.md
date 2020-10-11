@@ -21,6 +21,18 @@ Once the clone is complete then run the project using following command.
 
 *mvn clean install -DskipTests*
 
+Testing the build.
+<code> 
+$ java -jar target/SystemCleanup.jar "/d/Java Programs/git/SystemCleanup/testcases"
+Engine Version : 1.0.2-BUILD
+Analysing D:/Java Programs/git/SystemCleanup/testcases for duplicates ...
+Files scanned 3
+Duplicates : 1
+Removal commands : (Unix)
+rm -rf D:\Java Programs\git\SystemCleanup\testcases\subfolder\same-file-other-name.pptx
+Comparision completed!!
+</code> 
+
 ### Prerequisites
 ```
 1. jdk1.8

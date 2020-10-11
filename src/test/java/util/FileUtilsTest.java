@@ -1,26 +1,17 @@
 package util;
 
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.Test;
 
-public class FileUtilsTest extends TestCase
+
+public class FileUtilsTest
 {
-	
-	public FileUtilsTest(String testName)
-	{
-		super(testName);
-	}
-	
-	public static Test suite()
-	{
-		return new TestSuite(FileUtilsTest.class);
-	}
-	
+	@Test
 	public void getSHA1SUMTest()throws NoSuchAlgorithmException,IOException
 	{
 		String filename="OVERVIEW_SLIDE_modified.pptx";
@@ -35,8 +26,8 @@ public class FileUtilsTest extends TestCase
 			assertTrue(false);
 	}
 	
-	
-	public static void main(String[] args)throws NoSuchAlgorithmException,IOException
+	@Test
+	public void fileEqualityTest()throws NoSuchAlgorithmException,IOException
 	{
 		String fileName1="file1.pptx";
 		File file1=new File(fileName1);
@@ -56,6 +47,8 @@ public class FileUtilsTest extends TestCase
 
 		fileSize = FileUtils.sizeCalculator(fileName2);
 		System.out.println("FileSize for "+fileName2+" = "+fileSize);
+		
+		assertTrue(true);
 		
 		
 	}

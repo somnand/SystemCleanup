@@ -20,6 +20,8 @@ public class SearchEngine
 {
 	private static HashSet<FileInfo> fileList=new HashSet<FileInfo>();
 	private static HashSet<String> duplicateFileList = new HashSet<String>();
+	private static final String VERSION="1.0.2-BUILD";
+	
 	
 	/**
 	 * Method to iterate over the current folder and add the <code>FileInfo</code> into the HashSet.
@@ -56,12 +58,16 @@ public class SearchEngine
 		}		
 	}
 	
+	
+	
 	public static void main(String[] args)throws IOException,NoSuchAlgorithmException
 	{
 		if(args.length==0)
 		{
-			System.out.println("Usage :  java -jar target/SystemCleanup-0.0.1-SNAPSHOT.jar \"Path to the root\"");
+			System.out.println("Usage :  java -jar SystemCleanup.jar \"Path to the root within double quotes\"");
+			return;
 		}
+		System.out.println("Engine Version : "+VERSION);		
 		String rootPath = args[0];
 		File rootFolder = new File(rootPath);
 		System.out.println("Analysing "+rootPath+" for duplicates ...");		
@@ -71,28 +77,6 @@ public class SearchEngine
 		System.out.println("Removal commands : (Unix)");
 		for(String command : duplicateFileList)
 			System.out.println(command);
-		System.out.println("Comparision completed!!");
-		
-		
-		
-		//TODO Move this below test into a complete Test Case. 
-		/* Unit test case for SearchEngine */
-		/*
-		FileInfo file1 = new FileInfo();
-		FileInfo file2 = new FileInfo();
-		File file = new File("C:\\Users\\1021623\\git\\SystemCleanup\\file1.pptx");
-		file1.setFilename(file.getAbsolutePath());
-		file1.setFileSize(FileUtils.sizeCalculator(file));				
-		file1.setSha1sumValue(FileUtils.getSHA1SUM(file));
-		file = new File("C:\\Users\\1021623\\git\\SystemCleanup\\file2.pptx");
-		file2.setFilename(file.getAbsolutePath());
-		file2.setFileSize(FileUtils.sizeCalculator(file));				
-		file2.setSha1sumValue(FileUtils.getSHA1SUM(file));
-		System.out.println(file1);
-		System.out.println(fileList.add(file1));
-		System.out.println(file2);
-		System.out.println(fileList.add(file2));
-		System.out.println(fileList.size());
-		*/
+		System.out.println("Comparision completed!!");		
 	}
 }
