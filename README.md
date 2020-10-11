@@ -45,7 +45,8 @@ Currently the Unit test cases are not fully developed. So skipping them for now.
 
 ### Break down into end to end tests
 
-Tests will cover the overall functionality of the project.
+<code>FileUtilsTest.getSHA1SUMTest()</code>
+<code>FileUtilsTest.fileEqualityTest()</code>
 
 ## Built With
 

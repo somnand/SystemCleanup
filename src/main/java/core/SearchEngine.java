@@ -50,7 +50,7 @@ public class SearchEngine
 						
 				boolean isAdded = fileList.add(currentFileInfo);
 				if(!isAdded)
-					duplicateFileList.add("rm -rf "+currentFileInfo.getFilename());					
+					duplicateFileList.add(currentFileInfo.getFilename());					
 			}
 			if(file.isDirectory())
 				searchFolder(file);
@@ -74,9 +74,20 @@ public class SearchEngine
 		searchFolder(rootFolder);
 		System.out.println("Files scanned "+(fileList.size()+duplicateFileList.size()));
 		System.out.println("Duplicates : "+duplicateFileList.size());
-		System.out.println("Removal commands : (Unix)");
-		for(String command : duplicateFileList)
-			System.out.println(command);
+		//Determining the Operating System
+		String os = System.getProperty("os.name").toLowerCase();
+		System.out.println("Removal commands : "+os);		
+		String command = null;
+		if(os.contains("win"))
+			command="del /q ";
+		if(os.contains("nix"))
+			command="rm -f ";
+		if(os.contains("mac"))
+			command="rm -f ";
+		
+		for(String fileName : duplicateFileList)
+			System.out.println(command+""+fileName);
+					
 		System.out.println("Comparision completed!!");		
 	}
 }
