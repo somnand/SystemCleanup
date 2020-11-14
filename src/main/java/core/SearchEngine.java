@@ -20,7 +20,7 @@ public class SearchEngine
 {
 	private static HashSet<FileInfo> fileList=new HashSet<FileInfo>();
 	private static HashSet<String> duplicateFileList = new HashSet<String>();
-	private static final String VERSION="1.1.2-SNAPSHOT";
+	private static final String VERSION="1.2.2";
 	
 	
 	/**
