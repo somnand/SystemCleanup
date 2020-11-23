@@ -20,6 +20,8 @@ public class SearchEngine
 {
 	private static HashSet<FileInfo> fileList=new HashSet<FileInfo>();
 	private static HashSet<String> duplicateFileList = new HashSet<String>();
+	private static final String VERSION="1.2.2";
+	
 	
 	/**
 	 * Method to iterate over the current folder and add the <code>FileInfo</code> into the HashSet.
@@ -48,7 +50,7 @@ public class SearchEngine
 						
 				boolean isAdded = fileList.add(currentFileInfo);
 				if(!isAdded)
-					duplicateFileList.add("rm -rf "+currentFileInfo.getFilename());					
+					duplicateFileList.add(currentFileInfo.getFilename());					
 			}
 			if(file.isDirectory())
 				searchFolder(file);
@@ -56,43 +58,36 @@ public class SearchEngine
 		}		
 	}
 	
+	
+	
 	public static void main(String[] args)throws IOException,NoSuchAlgorithmException
 	{
 		if(args.length==0)
 		{
-			System.out.println("Usage :  java -jar target/SystemCleanup-0.0.1-SNAPSHOT.jar \"Path to the root\"");
+			System.out.println("Usage :  java -jar SystemCleanup.jar \"Path to the root within double quotes\"");
+			return;
 		}
+		System.out.println("Engine Version : "+VERSION);		
 		String rootPath = args[0];
 		File rootFolder = new File(rootPath);
-		System.out.println("Analysing "+rootPath+" for duplicates ...");		
+		System.out.println("Analysing "+rootFolder.getPath()+" for duplicates ...");		
 		searchFolder(rootFolder);
 		System.out.println("Files scanned "+(fileList.size()+duplicateFileList.size()));
 		System.out.println("Duplicates : "+duplicateFileList.size());
-		System.out.println("Removal commands : (Unix)");
-		for(String command : duplicateFileList)
-			System.out.println(command);
-		System.out.println("Comparision completed!!");
+		//Determining the Operating System
+		String os = System.getProperty("os.name").toLowerCase();
+		System.out.println("Removal commands : "+os);		
+		String command = null;
+		if(os.contains("win"))
+			command="del /q ";
+		if(os.contains("nix"))
+			command="rm -f ";
+		if(os.contains("mac"))
+			command="rm -f ";
 		
-		
-		
-		//TODO Move this below test into a complete Test Case. 
-		/* Unit test case for SearchEngine */
-		/*
-		FileInfo file1 = new FileInfo();
-		FileInfo file2 = new FileInfo();
-		File file = new File("C:\\Users\\1021623\\git\\SystemCleanup\\file1.pptx");
-		file1.setFilename(file.getAbsolutePath());
-		file1.setFileSize(FileUtils.sizeCalculator(file));				
-		file1.setSha1sumValue(FileUtils.getSHA1SUM(file));
-		file = new File("C:\\Users\\1021623\\git\\SystemCleanup\\file2.pptx");
-		file2.setFilename(file.getAbsolutePath());
-		file2.setFileSize(FileUtils.sizeCalculator(file));				
-		file2.setSha1sumValue(FileUtils.getSHA1SUM(file));
-		System.out.println(file1);
-		System.out.println(fileList.add(file1));
-		System.out.println(file2);
-		System.out.println(fileList.add(file2));
-		System.out.println(fileList.size());
-		*/
+		for(String fileName : duplicateFileList)
+			System.out.println(command+"\""+fileName+"\"");
+					
+		System.out.println("Comparision completed!!");		
 	}
 }
