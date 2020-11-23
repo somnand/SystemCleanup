@@ -70,7 +70,7 @@ public class SearchEngine
 		System.out.println("Engine Version : "+VERSION);		
 		String rootPath = args[0];
 		File rootFolder = new File(rootPath);
-		System.out.println("Analysing "+rootPath+" for duplicates ...");		
+		System.out.println("Analysing "+rootFolder.getPath()+" for duplicates ...");		
 		searchFolder(rootFolder);
 		System.out.println("Files scanned "+(fileList.size()+duplicateFileList.size()));
 		System.out.println("Duplicates : "+duplicateFileList.size());
@@ -86,7 +86,7 @@ public class SearchEngine
 			command="rm -f ";
 		
 		for(String fileName : duplicateFileList)
-			System.out.println(command+""+fileName);
+			System.out.println(command+"\""+fileName+"\"");
 					
 		System.out.println("Comparision completed!!");		
 	}
