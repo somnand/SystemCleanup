@@ -74,20 +74,24 @@ public class SearchEngine
 		searchFolder(rootFolder);
 		System.out.println("Files scanned "+(fileList.size()+duplicateFileList.size()));
 		System.out.println("Duplicates : "+duplicateFileList.size());
-		//Determining the Operating System
-		String os = System.getProperty("os.name").toLowerCase();
-		System.out.println("Removal commands : "+os);		
-		String command = null;
-		if(os.contains("win"))
-			command="del /q ";
-		if(os.contains("nix"))
-			command="rm -f ";
-		if(os.contains("mac"))
-			command="rm -f ";
-		
-		for(String fileName : duplicateFileList)
-			System.out.println(command+"\""+fileName+"\"");
-					
+		if(duplicateFileList.size()!=0)
+		{
+			//Determining the Operating System
+			String os = System.getProperty("os.name").toLowerCase();
+			System.out.println("Removal commands : "+os);		
+			String command = null;
+			if(os.contains("win"))
+				command="del /q ";
+			if(os.contains("nix"))
+				command="rm -f ";
+			if(os.contains("mac"))
+				command="rm -f ";
+			
+			for(String fileName : duplicateFileList)
+				System.out.println(command+"\""+fileName+"\"");		
+		}
+		else
+			System.out.println("No Duplicates found !!");
 		System.out.println("Comparision completed!!");		
 	}
 }
