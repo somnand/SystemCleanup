@@ -2,6 +2,8 @@ package core;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashSet;
 
@@ -20,7 +22,7 @@ public class SearchEngine
 {
 	private static HashSet<FileInfo> fileList=new HashSet<FileInfo>();
 	private static HashSet<String> duplicateFileList = new HashSet<String>();
-	private static final String VERSION="1.2.2";
+	private static final String VERSION="2.0.0";
 	
 	
 	/**
@@ -69,8 +71,22 @@ public class SearchEngine
 		}
 		System.out.println("Engine Version : "+VERSION);		
 		String rootPath = args[0];
-		File rootFolder = new File(rootPath);
-		System.out.println("Analysing "+rootFolder.getPath()+" for duplicates ...");		
+		File rootFolder=null;
+		Path path = Paths.get(rootPath);
+		/*
+		if(rootPath.equals("."))
+			rootPath=System.getProperty("user.dir");
+		if(rootPath.equals(".."))
+		{
+			rootPath=System.getProperty("user.dir");
+			rootFolder = new File(rootPath);
+			rootFolder=rootFolder.getParentFile();
+		}
+		else
+			rootFolder = new File(rootPath);
+		*/
+		rootFolder = new File(path.toAbsolutePath().toString());
+		System.out.println("Analysing "+rootFolder.getAbsolutePath()+" for duplicates ...");		
 		searchFolder(rootFolder);
 		System.out.println("Files scanned "+(fileList.size()+duplicateFileList.size()));
 		System.out.println("Duplicates : "+duplicateFileList.size());
