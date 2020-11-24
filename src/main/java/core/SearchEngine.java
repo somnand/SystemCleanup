@@ -72,19 +72,7 @@ public class SearchEngine
 		System.out.println("Engine Version : "+VERSION);		
 		String rootPath = args[0];
 		File rootFolder=null;
-		Path path = Paths.get(rootPath);
-		/*
-		if(rootPath.equals("."))
-			rootPath=System.getProperty("user.dir");
-		if(rootPath.equals(".."))
-		{
-			rootPath=System.getProperty("user.dir");
-			rootFolder = new File(rootPath);
-			rootFolder=rootFolder.getParentFile();
-		}
-		else
-			rootFolder = new File(rootPath);
-		*/
+		Path path = Paths.get(rootPath);		
 		rootFolder = new File(path.toAbsolutePath().toString());
 		System.out.println("Analysing "+rootFolder.getAbsolutePath()+" for duplicates ...");		
 		searchFolder(rootFolder);

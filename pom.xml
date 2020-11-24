@@ -4,7 +4,7 @@
 
 	<groupId>SystemCleanup</groupId>
 	<artifactId>SystemCleanup</artifactId>
-	<version>1.2.2-SNAPSHOT</version>
+	<version>2.0.0-STABLE</version>
 	<packaging>jar</packaging>
 
 	<name>SystemCleanup</name>
