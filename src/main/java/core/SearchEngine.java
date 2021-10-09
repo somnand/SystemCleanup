@@ -22,7 +22,7 @@ public class SearchEngine
 {
 	private static HashSet<FileInfo> fileList=new HashSet<FileInfo>();
 	private static HashSet<String> duplicateFileList = new HashSet<String>();
-	private static final String VERSION="2.0.0";
+	private static final String VERSION="2.0.1";
 	
 	
 	/**
@@ -55,8 +55,7 @@ public class SearchEngine
 					duplicateFileList.add(currentFileInfo.getFilename());					
 			}
 			if(file.isDirectory())
-				searchFolder(file);
-							
+				searchFolder(file);							
 		}		
 	}
 	
