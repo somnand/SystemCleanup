@@ -53,7 +53,6 @@ public class FileUtilsTest
 		assertEquals(fileSize, 6445510L);
 
 		fileSize = FileUtils.sizeCalculator(fileName2);
-		assertEquals(fileSize, 6445510L);	
-		
+		assertEquals(fileSize, 6445510L);		
 	}
 }
